@@ -3,6 +3,10 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+import Header from './components/Header';
+import MainContent from './components/MainContent';
+import Footer from './components/Footer';
+
 // ✅ Import your WelcomeMessage component
 import WelcomeMessage from './components/WelcomeMessage';
 
@@ -11,6 +15,11 @@ function App() {
 
   return (
     <>
+      <Header />
+      <MainContent />
+      <Footer />
+
+      {/* Optional: Keep the original Vite + React demo content below */}
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
