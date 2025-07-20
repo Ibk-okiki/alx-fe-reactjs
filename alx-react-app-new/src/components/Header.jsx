@@ -1,4 +1,4 @@
-// src/components/Header.jsx
+// -src/components/Header.jsx
 function Header() {
   return (
     <header style={{ backgroundColor: 'navy', color: 'white', textAlign: 'center', padding: '20px' }}>
