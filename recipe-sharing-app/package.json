@@ -3,4 +3,7 @@
   "react-dom": "^18.x.x",
   "zustand": "^4.x.x",
   ...
+}"devDependencies": {
+  "vite": "^5.x.x", 
+  ...
 }
