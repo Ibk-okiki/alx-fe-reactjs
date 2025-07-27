@@ -7,3 +7,9 @@
   "vite": "^5.x.x", 
   ...
 }
+"dependencies": {
+  "react": "...",
+  "react-dom": "...",
+  "react-router-dom": "^6.x.x",  // ✅ This should appear
+  ...
+}
