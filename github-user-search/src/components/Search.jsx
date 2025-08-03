@@ -49,7 +49,19 @@ const Search = () => {
           <p>{user.login}</p> {/* <-- contains 'login' */}
           <a href={user.html_url} target="_blank" rel="noopener noreferrer">
             Visit GitHub Profile
-          </a>
+   {users.length > 0 && users.map((user) => (
+  <div key={user.id} className="p-4 border rounded shadow-md flex items-center space-x-4">
+    <img src={user.avatar_url} alt="avatar" className="w-16 h-16 rounded-full" />
+    <div>
+      <h3 className="text-xl font-semibold">{user.login}</h3>
+      <a
+        href={user.html_url}
+        target="_blank"
+        rel="noreferrer"
+        className="text-blue-500 underline"
+      >
+        View Profile
+       </a>
         </div>
       )}
     </div>
