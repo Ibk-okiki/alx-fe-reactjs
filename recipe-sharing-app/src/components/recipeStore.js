@@ -3,8 +3,32 @@ import { create } from 'zustand';
 export const useRecipeStore = create((set, get) => ({
   recipes: [],
   filteredRecipes: [],
+  favorites: [],
+  recommendations: [],
   searchTerm: '',
-  setRecipes: (newRecipes) => set({ recipes: newRecipes })
+
+  // Set all recipes
+  setRecipes: (newRecipes) => {
+    set({
+      recipes: newRecipes,
+      filteredRecipes: get().filterRecipes(newRecipes, get().searchTerm),
+    });
+  },
+
+  // Filter recipes by search term
+  filterRecipes: (recipes, searchTerm) => {
+    return recipes.filter(recipe =>
+      recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  },
+
+  // Set search term and update filtered results
+  setSearchTerm: (term) => {
+    set({
+      searchTerm: term,
+      filteredRecipes: get().filterRecipes(get().recipes, term),
+    });
+  },
 
   // Add new recipe
   addRecipe: (newRecipe) => {
@@ -21,6 +45,7 @@ export const useRecipeStore = create((set, get) => ({
     set({
       recipes: updated,
       filteredRecipes: get().filterRecipes(updated, get().searchTerm),
+      favorites: get().favorites.filter(favId => favId !== id),
     });
   },
 
@@ -35,29 +60,26 @@ export const useRecipeStore = create((set, get) => ({
     });
   },
 
-  // ✅ Set entire recipe list manually
-  setRecipes: (recipes) => {
+  // Add to favorites
+  addFavorite: (recipeId) => {
+    if (!get().favorites.includes(recipeId)) {
+      set({ favorites: [...get().favorites, recipeId] });
+    }
+  },
+
+  // Remove from favorites
+  removeFavorite: (recipeId) => {
     set({
-      recipes,
-      filteredRecipes: get().filterRecipes(recipes, get().searchTerm),
+      favorites: get().favorites.filter(id => id !== recipeId),
     });
   },
 
-  // Set search term
-  setSearchTerm: (term) => {
-    set({
-      searchTerm: term,
-      filteredRecipes: get().filterRecipes(get().recipes, term),
-    });
-  },
-
-  // Pure filtering function
-  filterRecipes: (recipes, term) => {
-    const lower = term.toLowerCase();
-    return recipes.filter(
-      (recipe) =>
-        recipe.title.toLowerCase().includes(lower) ||
-        recipe.description.toLowerCase().includes(lower)
+  // Generate mock recommendations based on favorites
+  generateRecommendations: () => {
+    const state = get();
+    const recommended = state.recipes.filter(recipe =>
+      state.favorites.includes(recipe.id) && Math.random() > 0.5
     );
+    set({ recommendations: recommended });
   },
 }));
