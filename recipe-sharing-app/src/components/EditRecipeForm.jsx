@@ -8,8 +8,8 @@ const EditRecipeForm = ({ recipe }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault(); // ✅ prevents page reload
-
     updateRecipe({ id: recipe.id, title, description });
+    alert('Recipe updated!');
   };
 
   return (
