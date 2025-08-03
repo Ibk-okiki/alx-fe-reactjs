@@ -6,6 +6,7 @@ export const useRecipeStore = create((set, get) => ({
   favorites: [],
   recommendations: [],
   searchTerm: '',
+  setSearchTerm: (term) => set({ searchTerm: term }),
 
   // Set all recipes
   setRecipes: (newRecipes) => {
@@ -77,7 +78,7 @@ export const useRecipeStore = create((set, get) => ({
   // Generate mock recommendations based on favorites
   generateRecommendations: () => {
     const state = get();
-    const recommended = state.recipes.filter(recipe =>
+    const recommended = state.recipes.filter(recipe) =>
       state.favorites.includes(recipe.id) && Math.random() > 0.5
     );
     set({ recommendations: recommended });
