@@ -4,6 +4,8 @@ import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
   const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -26,8 +28,9 @@ const Search = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <form onSubmit={handleSearch}>
-        <input
+      <div className="max-w-3xl mx-auto p-4">
+        <form onSubmit={handleSearch}>
+         <input
           type="text"
           placeholder="Enter GitHub username"
           value={username}
