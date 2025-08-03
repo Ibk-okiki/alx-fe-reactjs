@@ -10,7 +10,11 @@ const DeleteRecipeButton = ({ recipeId }) => {
     navigate('/'); // redirect back to homepage
   };
 
-  return <button onClick={handleDelete}>Delete Recipe</button>;
+  return (
+    <button onClick={handleDelete} style={{ color: 'red' }}>
+      Delete Recipe
+    </button>
+    );
 };
 
 export default DeleteRecipeButton;
